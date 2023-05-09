@@ -1,0 +1,49 @@
+function a = RHvel(q,t)
+% r1 = q(1:2,1);
+% phi1 = q(3,1);
+% r2 = q(4:5,1);
+% phi2 = q(6,1);
+% r3 = q(7:8,1);
+% phi3 = q(9,1);
+L1  = 7.500;
+L2  = 0.700;
+L3  = 5.500;
+L4  = 2.400;
+L5  = 4.700;
+L6  = 3.200;
+L7  = 2.500;
+L8  = 2.650;
+L9  = 3.300;
+L10 = 2.430;
+L11 = 2.560;
+L12 = 4.160;
+L13 = 3.100;
+L14 = 2.100;
+L15 = 0.600;
+alpha2 = 28*pi/180;
+alpha3 = 70*pi/180;
+R = 1.000;
+omega0 = -2.5;
+omega1 = 1.75;
+L0 = 5.5;
+h = 1.3;
+
+s0C  = [-L3;L1];
+s0E  = [-L4;L2];
+s0G  = [L5;-L6];
+s1Am = [L8;0];
+s1Bm = [-L7;0];
+s2Bm = [-L9;L10];
+s2Dm = [-L12;-L11];
+s2Fm = [L13;-L14];
+s3Dm = R*[cos(alpha3);sin(alpha3)];
+s3Em = [0;-L15];
+n    = [cos(alpha2 + pi/2); sin(alpha2 + pi/2)];
+
+a = zeros(9,1);
+a(8,1) = omega0;
+
+% Translational driver
+Lt = L0 + h*sin(omega1*t);
+Ltd = omega1*h*cos(omega1*t);
+a(9,1) = 2*Lt*Ltd;
